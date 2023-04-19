@@ -32,6 +32,7 @@ function shili(){
     dis_container
     ;;
     6)
+     echo "感谢使用,如有问题联系2678857625@qq.com"
         exit
     ;;
    esac
