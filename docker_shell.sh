@@ -25,8 +25,8 @@ function mod_if_shell(){
   dis_container
 }
 function container_inspect(){
-    gateway=$(docker inspect $1 |grep '"Gateway":'|awk -F'["]' 'NR==1{print $4}')
-    ipadd=$(docker inspect $1 |grep '"IPAddress":'|awk -F'["]' 'NR==1{print $4}')
+    gateway=$(docker inspect $1 |grep -E '"Gateway":.*([0-9]|1[0-9][0-9]|2[0-5][0-5])\.([0-9]|1[0-9][0-9]|2[0-5][0-5])\.([0-9]|1[0-9][0-9]|2[0-5][0-5])\.([0-9]|1[0-9][0-9]|2[0-5][0-5]).*'|awk -F'["]' '{print $4}')
+    ipadd=$(docker inspect $1 |grep -E '"IPAddress":.*([0-9]|1[0-9][0-9]|2[0-5][0-5])\.([0-9]|1[0-9][0-9]|2[0-5][0-5])\.([0-9]|1[0-9][0-9]|2[0-5][0-5])\.([0-9]|1[0-9][0-9]|2[0-5][0-5]).*'|awk -F'["]' '{print $4}')
     macadd=$(docker inspect $1 |grep '"MacAddress":'|awk -F'["]' 'NR==1{print $4}')
     mak=$(docker inspect $1 |grep '"IPPrefixLen":'|awk -F'[: ]|[,]' 'NR!=1{print $23}')
     port=$(docker ps |grep $1|awk -F'[ ][ ]+' '{print $6}')
